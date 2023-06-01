@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+@font-face {
+  font-family: 'RockStar';
+  src: url('../src/assets/fonts/RockStar.woff2') format('woff2');
+  font-weight: 600;
+}
+@font-face {
+  font-family: 'OnestRegular';
+  src: url('../src/assets/fonts/OnestRegular.woff') format('woff');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'OnestMedium';
+  src: url('../src/assets/fonts/OnestMedium.woff') format('woff');
+  font-weight: 500;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: RockStar;
+  }
+}
+@layer utilities {
+  .bg-red-500 {
+    @apply bg-[#E72F3C]
+  }
+  .text-red-500 {
+    @apply text-[#E72F3C]
+  }
+  .bg-slate-800 {
+    @apply bg-[#161616]
+  }
+
+}
