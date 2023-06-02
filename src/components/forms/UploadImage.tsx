@@ -1,10 +1,8 @@
-import React, { useState, useCallback, Dispatch, SetStateAction } from "react";
+import { useState, useCallback, Dispatch, SetStateAction } from "react";
 import { useDropzone } from "react-dropzone";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import showToast, { ModalType } from "../modals/Toast";
 import UploadIcon from "../../assets/icons/common/UploadIcon";
 import Spin from "../../assets/icons/common/UploadSpin";
-import classNames from "classnames";
 import { useUser } from "../../state/user";
 import { storage } from "../../firebase";
 
@@ -28,25 +26,10 @@ const UploadImage = ({ image, setImage }: UploadProps): JSX.Element => {
          const image = await getDownloadURL(storageRef);
          if (image) {
             setImage(image);
-            showToast({
-               type: ModalType.success,
-               title: "Uploaded successfully",
-               description: "Image was uploaded!",
-            });
-         } else {
-            showToast({
-               type: ModalType.error,
-               title: "Failed to upload",
-               description: "Please try later",
-            });
          }
          return;
       } catch (error: any) {
-         showToast({
-            type: ModalType.error,
-            title: error?.message || "The error was occured",
-            description: "Please try later",
-         });
+         console.log(error);
       }
       setSpin(false);
    }, []);

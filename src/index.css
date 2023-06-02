@@ -33,15 +33,4 @@ html,
     font-family: RockStar;
   }
 }
-@layer utilities {
-  .bg-red-500 {
-    @apply bg-[#E72F3C]
-  }
-  .text-red-500 {
-    @apply text-[#E72F3C]
-  }
-  .bg-slate-800 {
-    @apply bg-[#161616]
-  }
 
-}
