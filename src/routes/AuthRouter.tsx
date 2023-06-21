@@ -12,10 +12,7 @@ export default function AuthRouter() {
    return (
       <BrowserRouter>
          <AuthenticatedHeader />
-         {/* <GuestHeader /> */}
-
          <SidebarMenu />
-
          <Routes>
             <Route path={ROUTES.FEED.route} element={<FeedPage />} />
             <Route

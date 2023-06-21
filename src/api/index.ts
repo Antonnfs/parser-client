@@ -9,6 +9,7 @@ export interface FetchDataProps {
    limit?: number;
    first?: string;
    last?: string;
+   sort?: "asc" | "desc";
    data?: Partial<FeedItem>;
 }
 
@@ -21,12 +22,14 @@ export const fetchData = async ({
    first,
    last,
    data,
+   sort,
 }: FetchDataProps) => {
    const token = await auth.currentUser?.getIdToken();
    const params = new URLSearchParams();
    !!first && params.append("first", first);
    !!last && params.append("last", last);
    !!limit && params.append("limit", limit.toString());
+   !!sort && params.append("sort", sort);
 
    const config = {
       headers: {
@@ -39,8 +42,6 @@ export const fetchData = async ({
    };
 
    try {
-      console.log("CONFIG", config);
-      console.log("data", data);
       const result = await axios(config);
       return await result.data;
    } catch (error: any) {

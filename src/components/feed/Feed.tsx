@@ -11,10 +11,12 @@ export default function Feed() {
    const sidebar = useRoot((state) => state.sidebar);
    const getPosts = usePosts((state) => state.getPosts);
    const posts = usePosts((state) => state.posts);
-   const { first, last, loading, page, pages } = usePosts((state) => state);
+   const { first, last, loading, page, pages, sort } = usePosts(
+      (state) => state
+   );
    useEffect(() => {
       getPosts();
-   }, [first, last]);
+   }, [first, last, sort]);
 
    if (loading) return <Loading />;
 

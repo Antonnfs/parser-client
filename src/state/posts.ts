@@ -25,9 +25,11 @@ export interface PostsStore {
    first: string;
    last: string;
    limit: number;
+   sort: "desc" | "asc";
    getPosts: () => Promise<void>;
    prevPage: () => void;
    nextPage: () => void;
+   toggleSort: () => void;
    deletePost: (id: string) => Promise<void>;
 }
 
@@ -43,12 +45,12 @@ export const usePosts = create<PostsStore>((set, getState) => ({
    first: "",
    last: "",
    limit: 30,
-
+   sort: "desc",
    getPosts: async () => {
-      const { url, limit, first, last } = getState();
+      const { url, limit, first, last, sort } = getState();
       set({ loading: true, error: "" });
       try {
-         const response = await fetchData({ url, limit, first, last });
+         const response = await fetchData({ url, limit, first, last, sort });
          const { items, count, pages } = response;
          set({ posts: items, count, pages, loading: false });
       } catch (error: any) {
@@ -57,6 +59,11 @@ export const usePosts = create<PostsStore>((set, getState) => ({
             loading: false,
          });
       }
+   },
+   toggleSort: () => {
+      let { sort } = getState();
+      sort === "desc" ? (sort = "asc") : (sort = "desc");
+      set({ sort, first: "", last: "", page: 1 });
    },
    nextPage: () => {
       const { posts, page } = getState();
